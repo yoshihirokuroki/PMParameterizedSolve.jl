@@ -947,7 +947,7 @@ version = "0.11.28"
 
 [[deps.PMParameterizedBase]]
 deps = ["ComponentArrays", "MacroTools", "ModelingToolkit", "SciMLBase", "Symbolics", "Unitful"]
-path = "/Users/knabt/.julia/dev/PMParameterizedBase"
+git-tree-sha1 = "0ea42172ebcb5a601881e3be4a009207dffe7744"
 uuid = "99b5832f-53bf-45ba-a9c8-837ddefabddf"
 version = "1.0.0"
 
