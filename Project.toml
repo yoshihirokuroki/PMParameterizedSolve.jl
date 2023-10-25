@@ -3,6 +3,10 @@ uuid = "c61c237a-0ee8-4089-aed3-ebe590de2f80"
 authors = ["Timothy Knab"]
 version = "1.0.0-DEV"
 
+[deps]
+DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
+PMParameterizedBase = "99b5832f-53bf-45ba-a9c8-837ddefabddf"
+
 [compat]
 julia = "1.9.3"
 
