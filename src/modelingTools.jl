@@ -30,8 +30,7 @@ end
 
 
 
-
-function solve(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing ; kwargs...)
+function DifferentialEquations.solve(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing; kwargs...)
     mdl_internal = deepcopy(mdl)
     regenerateODEProblem!(mdl_internal)
     sol = DifferentialEquations.solve(mdl_internal._odeproblem, alg; kwargs...)
@@ -45,7 +44,7 @@ function solve(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing ; kwargs.
 end
 
 
-function solve!(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing ; kwargs...)
+function DifferentialEquations.solve!(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing ; kwargs...)
     mdl_internal = deepcopy(mdl)
     regenerateODEProblem!(mdl_internal)
     sol = DifferentialEquations.solve(mdl_internal._odeproblem, alg; kwargs...)
