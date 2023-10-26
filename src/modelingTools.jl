@@ -18,8 +18,6 @@ Base.@kwdef struct partialSol
 end
 
 
-
-
 function (sol::PMSolution)(in)
     if length(in) == 1
         in = [in]

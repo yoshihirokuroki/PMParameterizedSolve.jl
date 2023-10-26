@@ -8,8 +8,8 @@ include("getProperty.jl")
 include("propertynames.jl")
 include("helpers.jl")
 
-export solve
-export solve!
+# export solve
+# export solve!
 
 # Reexport from PMParameterizedBase
 export @model
