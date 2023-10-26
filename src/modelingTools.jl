@@ -31,9 +31,8 @@ end
 
 
 function DifferentialEquations.solve(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing; kwargs...)
-    mdl_internal = deepcopy(mdl)
-    regenerateODEProblem!(mdl_internal)
-    sol = DifferentialEquations.solve(mdl_internal._odeproblem, alg; kwargs...)
+    regenerateODEProblem!(mdl)
+    sol = DifferentialEquations.solve(mdl._odeproblem, alg; kwargs...)
     solution = PMSolution(_solution = sol,
                             _states = mdl_internal.states,
                             _parameters = mdl_internal.parameters,
@@ -45,9 +44,8 @@ end
 
 
 function DifferentialEquations.solve!(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing ; kwargs...)
-    mdl_internal = deepcopy(mdl)
-    regenerateODEProblem!(mdl_internal)
-    sol = DifferentialEquations.solve(mdl_internal._odeproblem, alg; kwargs...)
+    regenerateODEProblem!(mdl)
+    sol = DifferentialEquations.solve(mdl._odeproblem, alg; kwargs...)
     solution = PMSolution(_solution = sol,
                             _states = mdl_internal.states,
                             _parameters = mdl_internal.parameters,
