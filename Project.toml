@@ -1,6 +1,6 @@
 name = "PMParameterizedSolve"
 uuid = "c61c237a-0ee8-4089-aed3-ebe590de2f80"
-authors = ["Timothy Knab"]
+authors = ["Tim Knab"]
 version = "0.1.2"
 
 [deps]
