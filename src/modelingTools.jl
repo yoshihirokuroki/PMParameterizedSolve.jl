@@ -32,26 +32,26 @@ end
 
 function DifferentialEquations.solve(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing; kwargs...)
     regenerateODEProblem!(mdl)
-    sol = DifferentialEquations.solve(mdl._odeproblem, alg; kwargs...)
-    solution = PMSolution(_solution = sol,
-                            _states = mdl_internal.states,
-                            _parameters = mdl_internal.parameters,
-                            _constants = mdl_internal._constants, 
-                            _observed = mdl_internal.observed,
-                            _names = vcat(collect(keys(mdl_internal.observed._values)),mdl_internal.parameters.names,mdl_internal.states.names))
+    sol = solve(mdl._odeproblem, alg; kwargs...)
+    solution = PMSolution(_solution = deepcopy(sol),
+                            _states = mdl.states,
+                            _parameters = mdl.parameters,
+                            _constants = mdl._constants, 
+                            _observed = mdl.observed,
+                            _names = vcat(collect(keys(mdl.observed._values)),mdl.parameters.names,mdl.states.names))
     return solution
 end
 
 
 function DifferentialEquations.solve!(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing ; kwargs...)
     regenerateODEProblem!(mdl)
-    sol = DifferentialEquations.solve(mdl._odeproblem, alg; kwargs...)
-    solution = PMSolution(_solution = sol,
-                            _states = mdl_internal.states,
-                            _parameters = mdl_internal.parameters,
-                            _constants = mdl_internal._constants, 
-                            _observed = mdl_internal.observed, 
-                            _names = vcat(collect(keys(mdl_internal.observed._values)),mdl_internal.parameters.names,mdl_internal.states.names))
+    sol = solve(mdl._odeproblem, alg; kwargs...)
+    solution = PMSolution(_solution = deepcopy(sol),
+                            _states = mdl.states,
+                            _parameters = mdl.parameters,
+                            _constants = mdl._constants, 
+                            _observed = mdl.observed, 
+                            _names = vcat(collect(keys(mdl.observed._values)),mdl.parameters.names,mdl.states.names))
     mdl._solution = solution
     return nothing
 end
