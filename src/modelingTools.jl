@@ -44,17 +44,17 @@ function DifferentialEquations.solve(mdl::PMModel, alg::Union{DEAlgorithm,Nothin
 end
 
 
-function DifferentialEquations.solve!(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing ; kwargs...)
-    regenerateODEProblem!(mdl)
-    sol = solve(mdl._odeproblem, alg; kwargs...)
-    solution = PMSolution(_solution = deepcopy(sol),
+function solve!(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing; kwargs...)
+    p = vcat(mdl.parameters.values, mdl._inputs.values)
+    prob = remake(mdl._odeproblem, p = p, u0 = mdl.states.values)
+    sol = solve(prob, alg; kwargs...)
+    solution = PMSolution(_solution = sol,
                             _states = mdl.states,
                             _parameters = mdl.parameters,
-                            _constants = mdl._constants, 
-                            _observed = mdl.observed, 
-                            _names = vcat(collect(keys(mdl.observed._values)),mdl.parameters.names,mdl.states.names))
+                            _constants = mdl.parameters.constants, 
+                            _observed = mdl.observed,
+                            _names = [names(mdl.observed)..., names(mdl.parameters)..., names(mdl.states)...])
     mdl._solution = solution
-    return nothing
 end
 
 
