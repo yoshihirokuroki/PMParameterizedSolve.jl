@@ -31,7 +31,7 @@ end
 
 
 function DifferentialEquations.solve(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing; kwargs...)
-    p = vcat(mdl.parameters.values, mdl._inputs.values)
+    p = vcat(mdl.parameters.values, mdl.constants.values, mdl._inputs.values)
     prob = remake(mdl._odeproblem, p = p, u0 = mdl.states.values)
     sol = solve(prob, alg; kwargs...)
     solution = PMSolution(_solution = sol,
@@ -45,7 +45,7 @@ end
 
 
 function solve!(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing; kwargs...)
-    p = vcat(mdl.parameters.values, mdl._inputs.values)
+    p = vcat(mdl.parameters.values, mdl.constants.values, mdl._inputs.values)
     prob = remake(mdl._odeproblem, p = p, u0 = mdl.states.values)
     sol = solve(prob, alg; kwargs...)
     solution = PMSolution(_solution = sol,
