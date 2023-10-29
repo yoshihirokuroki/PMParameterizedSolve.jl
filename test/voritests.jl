@@ -131,10 +131,13 @@ end;
 vori.tspan = (0.0, 25.0);
 vori.parameters.VenIC = 4.0;
 sol = solve(vori);
+sol(0.2).Ven
+
+
 solve!(vori);
 
 sol.Ven[1] == 4.0
-vori._solution.Ven[1] == 4.0
+# vori._solution.Ven[1] == 4.0
 
 
 

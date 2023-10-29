@@ -2,19 +2,19 @@ using DifferentialEquations
 
 Base.@kwdef struct PMSolution <: PMParameterizedBase.AbstractPMSolution
     _solution::ODESolution
-    _states::ModelValues
-    _parameters::ModelValues
-    _constants::ModelValues
-    _observed::ModelValues
+    _states::PMParameterizedBase.Variables
+    _parameters::PMParameterizedBase.Parameters
+    _constants::PMParameterizedBase.Constants
+    _observed::PMParameterizedBase.Observed
     _names::Vector{Symbol}
 end
 
 
 Base.@kwdef struct partialSol
     partialsolution
-    observed::ModelValues
-    parameters::ModelValues
-    states::ModelValues
+    observed::PMParameterizedBase.Observed
+    parameters::PMParameterizedBase.Parameters
+    states::PMParameterizedBase.Variables
 end
 
 
@@ -31,14 +31,15 @@ end
 
 
 function DifferentialEquations.solve(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing; kwargs...)
-    regenerateODEProblem!(mdl)
-    sol = solve(mdl._odeproblem, alg; kwargs...)
-    solution = PMSolution(_solution = deepcopy(sol),
+    p = vcat(mdl.parameters.values, mdl._inputs.values)
+    prob = remake(mdl._odeproblem, p = p, u0 = mdl.states.values)
+    sol = solve(prob, alg; kwargs...)
+    solution = PMSolution(_solution = sol,
                             _states = mdl.states,
                             _parameters = mdl.parameters,
-                            _constants = mdl._constants, 
+                            _constants = mdl.parameters.constants, 
                             _observed = mdl.observed,
-                            _names = vcat(collect(keys(mdl.observed._values)),mdl.parameters.names,mdl.states.names))
+                            _names = [names(mdl.observed)..., names(mdl.parameters)..., names(mdl.states)...])
     return solution
 end
 

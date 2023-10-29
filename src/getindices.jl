@@ -23,10 +23,12 @@ end
     if sym in [:parameters, :states, :observed, :partialsolution]
         out = getfield(x, sym)
     else
-        if sym in vcat(x.states.names, x.parameters.names)
-            out = x.partialsolution[sym]
+        if sym in vcat(x.states.names..., x.parameters.names...)
+            idx = x.states.sym_to_val[sym]
+            out = x.partialsolution[x.states.values[idx].first]
         elseif sym in x.observed.names
-            obs = x.observed._values[sym]._valmap[x.observed._values[sym].value]
+            idx = x.observed.sym_to_val[sym]
+            obs = x.observed.values[idx].second
             out = x.partialsolution[obs]
         else
             error("Unknown error")
