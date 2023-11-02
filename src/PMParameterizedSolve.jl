@@ -6,7 +6,6 @@ include("modelingTools.jl")
 include("getindices.jl")
 include("getProperty.jl")
 include("propertynames.jl")
-include("helpers.jl")
 
 export solve
 export solve!
