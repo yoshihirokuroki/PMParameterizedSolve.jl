@@ -28,7 +28,7 @@ end
 
 
 
-function DifferentialEquations.solve(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing; kwargs...)
+function solve(mdl::PMModel, alg::Union{DEAlgorithm,Nothing} = nothing; kwargs...)
     p = vcat(mdl.parameters.values, mdl.constants.values, mdl._inputs.values)
     prob = remake(mdl._odeproblem, p = p, u0 = mdl.states.values, tspan = mdl.tspan)
     sol = solve(prob, alg; kwargs...)
