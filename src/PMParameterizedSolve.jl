@@ -1,5 +1,6 @@
 module PMParameterizedSolve
 using PMParameterizedBase
+import DifferentialEquations: solve
 PMModel = PMParameterizedBase.PMModel
 ModelValues = PMParameterizedBase.ModelValues
 include("modelingTools.jl")

@@ -1,5 +1,3 @@
-using DifferentialEquations
-
 Base.@kwdef struct PMSolution <: PMParameterizedBase.AbstractPMSolution
     _solution::ODESolution
     _states::PMParameterizedBase.Variables
