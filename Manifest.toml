@@ -953,7 +953,9 @@ version = "0.11.28"
 
 [[deps.PMParameterizedBase]]
 deps = ["ComponentArrays", "MacroTools", "ModelingToolkit", "ReadOnlyArrays", "SciMLBase", "StaticArrays", "SymbolicUtils", "Symbolics", "Unitful"]
-path = "/Users/knabt/.julia/dev/PMParameterizedBase"
+git-tree-sha1 = "6a5d1316dab6cf55596513d46c400eaf7c18308f"
+repo-rev = "main"
+repo-url = "https://github.com/metrumresearchgroup/PMParameterizedBase.jl.git"
 uuid = "99b5832f-53bf-45ba-a9c8-837ddefabddf"
 version = "0.2.10"
 
