@@ -1,5 +1,5 @@
 module PMParameterizedSolve
-using PMParameterizedBase
+using ..PMParameterizedBase
 import DifferentialEquations: solve
 using DifferentialEquations
 PMModel = PMParameterizedBase.PMModel
